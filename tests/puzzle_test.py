@@ -18,3 +18,10 @@ def test_mock_generate_type():
         puzzle = Puzzle()
         generated_types = puzzle.generate_types()
         assert generated_types  == "Math"
+
+def test_difficulty():
+    puzzle = Puzzle()
+    puzzle.set_difficulty(1)
+    difficulty = puzzle.difficulty
+    assert difficulty == "Easy"
+    
