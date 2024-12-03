@@ -38,12 +38,6 @@ This project strictly adheres to the TDD workflow:
 - **Green**: Implement minimal code to pass the test
 - **Refactor**: Improve code design without changing behavior
 
-
-
-
-- Linnaeus University
-- 1DV609 Course Staff
-
 ---
 
 **Note**: This project is a demonstration of Test-Driven Development principles and is part of an academic course assignment.
