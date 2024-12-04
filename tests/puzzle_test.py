@@ -125,3 +125,30 @@ def test_answer_validation_logic():
         
         for math_puzzle in math_puzzles:
             puzzle.validate_answer(math_puzzle, math_puzzle["solution"])
+            
+def test_puzzle_answer_validation_edge_cases():
+   
+    puzzle = Puzzle()
+    puzzle.set_difficulty(1)
+    
+    test_cases = [
+        
+        {"input": " 4 ", "expected": True},
+        {"input": "4", "expected": True},
+        
+       
+        {"input": "JOYFUL", "expected": True},
+        {"input": "Joyful", "expected": True},
+        
+        
+        {"input": "par", "expected": False},
+        
+        
+        {"input": "4.0", "expected": False} 
+    ]
+    
+    
+    test_puzzle = next(p for p in puzzle.puzzle_data["Easy"] if p['type'] == "Math")
+    
+    for case in test_cases:
+        assert puzzle.validate_answer(test_puzzle, case['input']) == case['expected']
