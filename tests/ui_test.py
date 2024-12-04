@@ -29,7 +29,7 @@ def test_get_player_name_empty_input(mock_input):
         ui.get_player_name()
         
 @patch('builtins.input')
-def test_get_player_name_short_input(self, mock_input):
+def test_get_player_name_short_input(mock_input):
         
     mock_input.return_value = "A"
         

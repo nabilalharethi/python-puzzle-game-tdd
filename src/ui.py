@@ -16,5 +16,10 @@ class UI:
         
         if not name:
             raise ValueError("Player name cannot be empty")
+        
+        if len(name) < 2:
+            raise ValueError("Player name must be at least 2 characters")
+        
         return name
+    
     
