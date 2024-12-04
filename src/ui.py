@@ -13,4 +13,8 @@ class UI:
     def get_player_name(self):
         
         name = input("Enter your name: ").strip()
+        
+        if not name:
+            raise ValueError("Player name cannot be empty")
         return name
+    
