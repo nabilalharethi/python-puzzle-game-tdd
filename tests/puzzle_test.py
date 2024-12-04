@@ -131,21 +131,86 @@ def test_puzzle_answer_validation_edge_cases():
     puzzle = Puzzle()
     puzzle.set_difficulty(1)
     
-    test_cases = [
-        
-        {"input": " 4 ", "expected": True},
-        {"input": "4", "expected": True},
-        
-       
-        {"input": "JOYFUL", "expected": True},
-        {"input": "Joyful", "expected": True},
-        
-        
-        {"input": "par", "expected": False},
-        
-        
-        {"input": "4.0", "expected": False} 
-    ]
+    test_cases = []
+    
+    for level, puzzles in puzzle.puzzle_data.items():
+        for puzzle_data in puzzles:
+            solution = puzzle_data['solution']
+            content = puzzle_data['content']
+
+           
+            if isinstance(solution, str):
+                test_cases.append({
+                    "input": solution,  
+                    "expected": True,
+                    "puzzle": puzzle_data
+                })
+                test_cases.append({
+                    "input": solution.upper(),  
+                    "expected": True,
+                    "puzzle": puzzle_data
+                })
+                test_cases.append({
+                    "input": solution.lower(),  
+                    "expected": True,
+                    "puzzle": puzzle_data
+                })
+                test_cases.append({
+                    "input": f" {solution} ",  
+                    "expected": True,
+                    "puzzle": puzzle_data
+                })
+                test_cases.append({
+                    "input": "wrong",  
+                    "expected": False,
+                    "puzzle": puzzle_data
+                })
+
+           
+            if isinstance(solution, (int, float)):
+                test_cases.append({
+                    "input": str(solution),  
+                    "expected": True,
+                    "puzzle": puzzle_data
+                })
+                test_cases.append({
+                    "input": f"{solution} ",  
+                    "expected": True,
+                    "puzzle": puzzle_data
+                })
+                test_cases.append({
+                    "input": str(float(solution)),  
+                    "expected": False,  
+                    "puzzle": puzzle_data
+                })
+                test_cases.append({
+                    "input": "4.0",  
+                    "expected": False,
+                    "puzzle": puzzle_data
+                })
+                test_cases.append({
+                    "input": "wrong number", 
+                    "expected": False,
+                    "puzzle": puzzle_data
+                })
+
+            
+            if isinstance(solution, str):
+                test_cases.append({
+                    "input": solution,  
+                    "expected": True,
+                    "puzzle": puzzle_data
+                })
+                test_cases.append({
+                    "input": solution.upper(), 
+                    "expected": True,
+                    "puzzle": puzzle_data
+                })
+                test_cases.append({
+                    "input": "wrong answer",  
+                    "expected": False,
+                    "puzzle": puzzle_data
+                })
     
     
     test_puzzle = next(p for p in puzzle.puzzle_data["Easy"] if p['type'] == "Math")
