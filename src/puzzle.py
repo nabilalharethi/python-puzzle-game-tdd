@@ -84,5 +84,23 @@ class Puzzle:
 
         if answer is None or answer == "" or answer == []:
             raise ValueError("Invalid answer format")
+        cleaned_answer = str(answer).strip()
 
-        return answer == puzzle["solution"]
+        
+        if isinstance(puzzle["solution"], str):
+            solution = puzzle["solution"].strip().lower()
+            cleaned_answer = cleaned_answer.lower()  
+            return cleaned_answer == solution
+
+       
+        if isinstance(puzzle["solution"], (int, float)):
+            try:
+                cleaned_answer = float(cleaned_answer)  
+                return cleaned_answer == float(puzzle["solution"])
+            except ValueError:
+                return False  
+
+       
+    
+        return cleaned_answer == str(puzzle["solution"]).strip()
+
