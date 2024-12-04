@@ -55,7 +55,7 @@ def test_genrating_based_on_difficulty():
     
     puzzle.set_difficulty(3)
     hard_puzzle = puzzle.generate_puzzle()
-    assert hard_puzzle["type"] in ["Math", "words", "Logic"]
+    assert hard_puzzle["type"] in ["Math", "Words", "Logic"]
     assert "content" in hard_puzzle
     assert "solution" in hard_puzzle
     

@@ -1,4 +1,5 @@
 import random
+from typing import Any, Dict
 
 
 class Puzzle:
@@ -43,3 +44,10 @@ class Puzzle:
         
         puzzles = self.puzzle_data[self.difficulty]
         return random.choice(puzzles)
+    
+    def validate_answer(self, puzzle: Dict[str, Any], answer: Any) -> bool:
+
+        if answer is None or answer == "" or answer == []:
+            raise ValueError("Invalid answer format")
+
+        return answer == puzzle["solution"]
