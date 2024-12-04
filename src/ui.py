@@ -12,4 +12,5 @@ class UI:
         
     def get_player_name(self):
         
-        return input("Enter your name: ")
+        name = input("Enter your name: ").strip()
+        return name
