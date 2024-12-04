@@ -25,3 +25,15 @@ def test_difficulty():
     difficulty = puzzle.difficulty
     assert difficulty == "Easy"
     
+    puzzle.set_difficulty(2)
+    difficulty = puzzle.difficulty
+    assert difficulty == "Medium"
+    
+    puzzle.set_difficulty(3)
+    difficulty = puzzle.difficulty
+    assert difficulty == "Hard"
+    
+    with pytest.raises(ValueError):
+        puzzle.set_difficulty(0)
+    
+    
