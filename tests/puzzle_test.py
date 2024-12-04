@@ -67,3 +67,45 @@ def test_generating_without_difficulty():
         puzzle.generate_puzzle()
     
     
+def test_answer_validation_math():
+    
+    puzzle = Puzzle()
+    for difficulty_level in [1, 2, 3]:  # 1 = Easy, 2 = Medium, 3 = Hard
+        puzzle.set_difficulty(difficulty_level)
+        
+        puzzles_at_level = puzzle.puzzle_data[puzzle.difficulty]
+        
+        math_puzzles = [p for p in puzzles_at_level if p["type"] == "Math"]
+        assert math_puzzles, f"No Math puzzles found in {puzzle.difficulty} difficulty"
+        
+        for math_puzzle in math_puzzles:
+            puzzle.validate_answer(math_puzzle, math_puzzle["solution"])
+            
+        
+def test_answer_validation_words():
+    
+    puzzle = Puzzle()
+    for difficulty_level in [1, 2, 3]:  # 1 = Easy, 2 = Medium, 3 = Hard
+        puzzle.set_difficulty(difficulty_level)
+        
+        puzzles_at_level = puzzle.puzzle_data[puzzle.difficulty]
+        
+        math_puzzles = [p for p in puzzles_at_level if p["type"] == "Words"]
+        assert math_puzzles, f"No Words  puzzles found in {puzzle.difficulty} difficulty"
+        
+        for math_puzzle in math_puzzles:
+            puzzle.validate_answer(math_puzzle, math_puzzle["solution"])
+            
+def test_answer_validation_logic():
+    
+    puzzle = Puzzle()
+    for difficulty_level in [1, 2, 3]:  # 1 = Easy, 2 = Medium, 3 = Hard
+        puzzle.set_difficulty(difficulty_level)
+        
+        puzzles_at_level = puzzle.puzzle_data[puzzle.difficulty]
+        
+        math_puzzles = [p for p in puzzles_at_level if p["type"] == "Logic"]
+        assert math_puzzles, f"No logic  puzzles found in {puzzle.difficulty} difficulty"
+        
+        for math_puzzle in math_puzzles:
+            puzzle.validate_answer(math_puzzle, math_puzzle["solution"])
