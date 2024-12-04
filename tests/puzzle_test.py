@@ -64,6 +64,6 @@ def test_generating_without_difficulty():
     puzzle = Puzzle()
     
     with pytest.raises(ValueError):
-        puzzle.puzzle.generate_puzzle()
+        puzzle.generate_puzzle()
     
     
