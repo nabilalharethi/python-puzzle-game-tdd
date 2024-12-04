@@ -18,3 +18,12 @@ def test_get_player_name():
         player_name = ui.get_player_name()
         mock_input.assert_called_once_with("Enter your name: ")
         assert player_name == "PlayerTest"
+
+@patch('builtins.input')
+def test_get_player_name_empty_input(mock_input):
+        
+    mock_input.return_value = ""
+        
+    ui = UI()
+    with pytest.raises(ValueError, match="Player name cannot be empty"):
+        ui.get_player_name()
