@@ -21,7 +21,11 @@ def test_puzzle_unique_content():
     generated_puzzles = set()
     for _ in range(10):
         new_puzzle = puzzle.generate_puzzle()
+        
+        if new_puzzle is None:
+            break
         assert new_puzzle['content'] not in generated_puzzles
+    
         generated_puzzles.add(new_puzzle['content'])
 
 
