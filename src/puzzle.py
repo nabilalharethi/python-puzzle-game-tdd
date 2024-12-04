@@ -77,6 +77,9 @@ class Puzzle:
         new_puzzle = random.choice(available_puzzles)
         self.used_puzzles.add(new_puzzle['content'])
         
+        time_limits = {"Easy": 30, "Medium": 60, "Hard": 90} 
+        new_puzzle["time_limit"] = time_limits[self.difficulty]
+        
         return new_puzzle
     
     
