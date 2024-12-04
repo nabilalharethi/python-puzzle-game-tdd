@@ -213,7 +213,6 @@ def test_puzzle_answer_validation_edge_cases():
                 })
     
     
-    test_puzzle = next(p for p in puzzle.puzzle_data["Easy"] if p['type'] == "Math")
     
     for case in test_cases:
-        assert puzzle.validate_answer(test_puzzle, case['input']) == case['expected']
+        assert puzzle.validate_answer(case["puzzle"], case["input"]) == case["expected"], f"Failed for puzzle: {case['puzzle']['content']} with input {case['input']}"
