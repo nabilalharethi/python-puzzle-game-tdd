@@ -8,21 +8,46 @@ class Puzzle:
         self.difficulty = None
         self.puzzle_data = {
             "Easy": [
-                {"type": "Math", "content": "2 + 2 = ?", "solution": 4},
+                {"type": "Math", "content": "2 + 2 = ?", "solution": "4"},
+                {"type": "Math", "content": "What is 10 - 4?", "solution": "6"},
+                {"type": "Math", "content": "What is 2 * 6?", "solution": "12"},
+                
+                {"type": "Words", "content": "Synonym for 'happy'", "solution": "joyful"},
+                {"type": "Words", "content": "Opposite of 'brave'", "solution": "coward"},
                 {"type": "Words", "content": "Fill in the blank: C _ T", "solution": "CAT"},
-                 {"type": "Logic", "content": "What comes next? 2, 4, 6, ?","solution": 8}
+                
+                {"type": "Logic", "content": "If A = B and B = C, then A = ?", "solution": "C"},
+                {"type": "Logic", "content": "What comes next? 2, 4, 8, 16, ?", "solution": "32"},
+                {"type": "Logic", "content": "What comes next? 2, 4, 6, ?","solution": "8"}
 
             ],
             "Medium": [
-                {"type": "Math", "content": "12 x 11 = ?", "solution": 132},
+                {"type": "Math", "content": "12 x 11 = ?", "solution": "132"},
+                {"type": "Math", "content": "What is 15 * 4?", "solution": "60"},
+                {"type": "Math", "content": "What is 144 ÷ 12?", "solution": "12"},
+                
                 {"type": "Words","content": "Fill in the blanks: _ I _ P _ A _ T","solution": "ELEPHANT"},
-                {"type": "Logic","content": "What comes next? 1, 1, 2, 3, 5, ?","solution": 8}
+                {"type": "Words", "content": "Rearrange 'listen' to form a new word", "solution": "silent"},
+                {"type": "Words", "content": "Find a 6-letter word that means 'to move quickly'", "solution": "hustle"},
+                
+                {"type": "Logic", "content": "If P implies Q, and Q is false, what can be said about P?", "solution": "unknown"},
+                {"type": "Logic", "content": "What number should replace the '?' 2, 5, 10, 17, ?", "solution": "26"},
+                {"type": "Logic","content": "What comes next? 1, 1, 2, 3, 5, ?","solution": "8"}
 
             ],
             "Hard": [
-                {"type": "Math","content": "What is the result of (15 × 8) + (12 ÷ 4) - 7?","solution": 117},
-                {"type": "Logic", "content": "Rearrange: D E L I M A", "solution": "MEDIAL"},
+                {"type": "Math","content": "What is the result of (15 × 8) + (12 ÷ 4) - 7?","solution": "117"},
+                {"type": "Math", "content": "Calculate 17^2 - 8^2", "solution": "225"},
+                {"type": "Math", "content": "What is 123 * 4?", "solution": "492"},
+                
                 {"type": "Words", "content": "Unscramble: P A L E L", "solution": "APPLE"},
+                {"type": "Words", "content": "Create an anagram of 'algorithm'", "solution": "logarithm"},
+                {"type": "Words", "content": "Find a palindrome word", "solution": "level"},
+                
+                {"type": "Logic", "content": "If A > B, B > C, what is always true about A and C?", "solution": "A > C"},
+                {"type": "Logic", "content": "What comes next? 1, 1, 2, 3, 5, 8, ?", "solution": "13"},
+                {"type": "Logic", "content": "Rearrange: D E L I M A", "solution": "MEDIAL"},
+                
                 
 
             ]
