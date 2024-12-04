@@ -216,3 +216,21 @@ def test_puzzle_answer_validation_edge_cases():
     
     for case in test_cases:
         assert puzzle.validate_answer(case["puzzle"], case["input"]) == case["expected"], f"Failed for puzzle: {case['puzzle']['content']} with input {case['input']}"
+    
+def test_puzzle_time_limit():
+   
+    puzzle = Puzzle()
+    puzzle.set_difficulty(2)
+    
+    
+    for _ in range(10):
+        new_puzzle = puzzle.generate_puzzle()
+        
+                
+        if new_puzzle is None:
+            break
+        
+        # Add time limit to puzzle dictionary
+        assert "time_limit" in new_puzzle, "Puzzle should have a time limit"
+        assert isinstance(new_puzzle["time_limit"], int), "Time limit should be an integer"
+        assert new_puzzle["time_limit"] > 0, "Time limit should be positive"
