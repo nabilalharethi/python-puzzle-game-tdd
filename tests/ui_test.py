@@ -27,3 +27,12 @@ def test_get_player_name_empty_input(mock_input):
     ui = UI()
     with pytest.raises(ValueError, match="Player name cannot be empty"):
         ui.get_player_name()
+        
+@patch('builtins.input')
+def test_get_player_name_short_input(self, mock_input):
+        
+    mock_input.return_value = "A"
+        
+    ui = UI()
+    with pytest.raises(ValueError, match="Player name must be at least 2 characters"):
+        ui.get_player_name()
