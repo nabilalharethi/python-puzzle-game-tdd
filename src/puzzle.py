@@ -6,6 +6,7 @@ class Puzzle:
     def __init__(self):
         self.Types = ["Math", "Words", "Logic"]
         self.difficulty = None
+        self.used_puzzles = set()
         self.puzzle_data = {
             "Easy": [
                 {"type": "Math", "content": "2 + 2 = ?", "solution": "4"},
@@ -68,7 +69,16 @@ class Puzzle:
             raise ValueError("Difficulty is not set. Call set_difficulty(level) first.")
         
         puzzles = self.puzzle_data[self.difficulty]
-        return random.choice(puzzles)
+        available_puzzles = [puzzle for puzzle in puzzles if puzzle['content'] not in self.used_puzzles]
+        
+        if len(available_puzzles) == 0:
+            return None  
+        
+        new_puzzle = random.choice(available_puzzles)
+        self.used_puzzles.add(new_puzzle['content'])
+        
+        return new_puzzle
+    
     
     def validate_answer(self, puzzle: Dict[str, Any], answer: Any) -> bool:
 
