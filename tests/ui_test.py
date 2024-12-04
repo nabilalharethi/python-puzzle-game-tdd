@@ -10,3 +10,11 @@ def test_display_welcome_message():
         ui.display_welcome_message()
         mock_print.assert_called_once()
         assert "Welcome" in mock_print.call_args[0][0]
+        
+def test_get_player_name():
+    
+    ui = UI()
+    with patch('builtins.input', return_value="PlayerTest") as mock_input:
+        player_name = ui.get_player_name()
+        mock_input.assert_called_once_with("Enter your name: ")
+        assert player_name == "PlayerTest"
