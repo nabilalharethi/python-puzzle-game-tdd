@@ -5,12 +5,24 @@ from unittest.mock import patch
 from src.puzzle import Puzzle
 
 
+
 def test_puzzle_type_genration():
     puzzle = Puzzle()
     Types = ["Math", "Words", "Logic"]
     generated_types = puzzle.generate_types()
     assert generated_types in Types
+
+def test_puzzle_unique_content():
     
+    puzzle = Puzzle()
+    puzzle.set_difficulty(1)
+    
+    # Generate multiple puzzles and check for uniqueness
+    generated_puzzles = set()
+    for _ in range(10):
+        new_puzzle = puzzle.generate_puzzle()
+        assert new_puzzle['content'] not in generated_puzzles
+        generated_puzzles.add(new_puzzle['content'])
 
 
 def test_mock_generate_type():
