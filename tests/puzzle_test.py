@@ -35,5 +35,35 @@ def test_difficulty():
     
     with pytest.raises(ValueError):
         puzzle.set_difficulty(0)
+        
+        
+def test_genrating_based_on_difficulty():
+    
+    puzzle = Puzzle()
+    
+    puzzle.set_difficulty(1)
+    easy_puzzle = puzzle.generate_puzzle()
+    assert easy_puzzle["type"] in ["Math", "Words", "Logic"]
+    assert "content" in easy_puzzle
+    assert "solution" in easy_puzzle
+    
+    puzzle.set_difficulty(2)
+    medium_puzzle = puzzle.generate_puzzle()
+    assert medium_puzzle["type"] in ["Math", "Words", "Logic"]
+    assert "content" in medium_puzzle
+    assert "solution" in medium_puzzle
+    
+    puzzle.set_difficulty(3)
+    hard_puzzle = puzzle.generate_puzzle()
+    assert hard_puzzle["type"] in ["Math", "words", "Logic"]
+    assert "content" in hard_puzzle
+    assert "solution" in hard_puzzle
+    
+    
+def test_generating_without_difficulty():
+    puzzle = Puzzle()
+    
+    with pytest.raises(ValueError):
+        puzzle.puzzle.generate_puzzle()
     
     
