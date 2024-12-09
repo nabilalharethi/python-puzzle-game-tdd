@@ -13,7 +13,8 @@ class Game:
         self.lives = 3
 
     def start_game(self):
-        pass
+        while self.game_over is False:
+            self.play_turn()
 
     def play_turn(self):
         pass
