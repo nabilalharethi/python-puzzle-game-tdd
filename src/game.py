@@ -15,8 +15,10 @@ class Game:
         self.ui = UI()
 
     def start_game(self):
+        self.ui.display_welcome_message()
         while self.game_over is False:
             self.play_turn()
 
     def play_turn(self):
+        
         pass

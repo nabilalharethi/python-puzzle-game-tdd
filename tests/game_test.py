@@ -54,3 +54,13 @@ class TestGame:
         sut.start_game()
 
         sut.ui.display_welcome_message.assert_called_once()
+
+    def test_play_turn_calls_generate_puzzle(self):
+        sut = Game()
+        sut.ui = Mock()
+        mock_puzzle = Mock()
+        sut.puzzle = mock_puzzle
+
+        sut.play_turn()
+
+        mock_puzzle.generate_puzzle.assert_called_once()
