@@ -16,8 +16,8 @@ class TestGame:
         return Game  # Provide the Game class as a fixture
     
     def test_startgame_exists(self):
-        #create sut variable 
-        assert hasattr(Game, 'start_game')
+        sut = Game()
+        assert hasattr(sut, 'start_game')
 
     def test_game_attributes(self):
         sut = Game()
