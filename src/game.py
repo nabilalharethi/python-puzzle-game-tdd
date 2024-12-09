@@ -20,5 +20,5 @@ class Game:
             self.play_turn()
 
     def play_turn(self):
-        
+        self.puzzle.generate_puzzle()
         pass
