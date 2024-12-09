@@ -41,3 +41,16 @@ class TestGame:
         with patch.object(sut, 'play_turn', side_effect=mock_play_turn_side_effect) as mock_play_turn:
             sut.start_game()
             assert mock_play_turn.call_count == 3, "play_turn should be called until game_over is True"
+    
+    def test_start_game_calls_ui_message(self):
+        sut = Game()
+        sut.ui = Mock()
+        
+        def mock_play_turn():
+            sut.game_over = True
+        
+        sut.play_turn = Mock(side_effect=mock_play_turn)
+
+        sut.start_game()
+
+        sut.ui.display_welcome_message.assert_called_once()

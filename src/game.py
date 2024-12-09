@@ -15,7 +15,6 @@ class Game:
         self.ui = UI()
 
     def start_game(self):
-        
         while self.game_over is False:
             self.play_turn()
 
