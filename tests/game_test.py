@@ -61,6 +61,8 @@ class TestGame:
         mock_puzzle = Mock()
         sut.puzzle = mock_puzzle
 
-        sut.play_turn()
+        with patch("builtins.input", return_value="2"):
+            sut.play_turn()
 
         mock_puzzle.generate_puzzle.assert_called_once()
+    
