@@ -13,6 +13,7 @@ class Game:
         self.lives = 3
 
     def start_game(self):
+        
         while self.game_over is False:
             self.play_turn()
 

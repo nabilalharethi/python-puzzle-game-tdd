@@ -25,6 +25,7 @@ class TestGame:
         assert hasattr(sut, 'game_over') # Checks if constructor has game_over instance
         assert hasattr(sut, 'score') # Checks if constructor has score instance
         assert hasattr(sut, 'lives') # Checks if constructor has lives instance
+        assert hasattr(sut, 'UI') # Checks if constructor has UI instance
 
     def test_start_game_calls_play_turn_until_game_over(self):
         sut = Game()
