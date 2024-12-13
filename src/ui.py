@@ -4,8 +4,7 @@ class UI:
     def __init__(self):
         
         pass
-    
-        
+      
     def display_welcome_message(self):
         
         print("🧩 Welcome to Puzzle Challenge! 🧩")
@@ -27,4 +26,8 @@ class UI:
     def show_message(self, message):
         
         print(message)
+        
+    def prompt_input(self, prompt):
+
+        return input(prompt).strip()
     
