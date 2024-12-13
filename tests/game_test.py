@@ -101,3 +101,18 @@ class TestGame:
             sut.play_turn()
 
         mock_puzzle.validate_answer.assert_called_once_with(generated_puzzle, "4")
+
+    def test_play_turn_updates_score_on_correct_answer(self):
+        sut = Game()
+        sut.ui = Mock()
+        mock_puzzle = Mock()
+        sut.puzzle = mock_puzzle
+        sut.score = 0
+        generated_puzzle = {"content": "2 + 2 = ?", "solution": "4"}
+        mock_puzzle.generate_puzzle.return_value = generated_puzzle
+        mock_puzzle.validate_answer.return_value = True  # Simulate correct answer
+
+        with patch("builtins.input", return_value="2"):
+            sut.play_turn()
+            
+        assert sut.score == 10, "Score should increase by 10 for a correct answer"
