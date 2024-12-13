@@ -37,4 +37,9 @@ class Game:
             return
         self.ui.display_puzzle(puzzle)
         
+        player_answer = self.ui.get_input("Enter your answer: ")
+        if self.puzzle.validate_answer(puzzle, player_answer):
+            self.ui.display_message("Correct!")
+        else:
+            self.ui.display_message("Incorrect!")
         pass
