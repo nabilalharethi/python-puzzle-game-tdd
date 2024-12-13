@@ -66,3 +66,11 @@ class TestGame:
 
         mock_puzzle.generate_puzzle.assert_called_once()
     
+    def test_play_turn_validates_difficulty_input(self):
+        sut = Game()
+        sut.ui = Mock()
+        sut.puzzle = Mock()
+
+        with patch("builtins.input", side_effect=["0", "4", "2"]):  # Invalid, invalid, valid
+            sut.play_turn()
+        sut.puzzle.set_difficulty.assert_called_once_with(2)
