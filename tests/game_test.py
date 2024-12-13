@@ -74,3 +74,16 @@ class TestGame:
         with patch("builtins.input", side_effect=["0", "4", "2"]):  # Invalid, invalid, valid
             sut.play_turn()
         sut.puzzle.set_difficulty.assert_called_once_with(2)
+
+    def test_play_turn_displays_puzzle(self):
+        sut = Game()
+        sut.ui = Mock()
+        mock_puzzle = Mock()
+        generated_puzzle = {"content": "2 + 2 = ?", "solution": "4"}
+        mock_puzzle.generate_puzzle.return_value = generated_puzzle
+        sut.puzzle = mock_puzzle
+
+        with patch("builtins.input", return_value="2"):
+            sut.play_turn()
+
+        sut.ui.display_puzzle.assert_called_once_with(generated_puzzle)
