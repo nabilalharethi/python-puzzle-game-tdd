@@ -31,4 +31,10 @@ class Game:
 
         self.puzzle.set_difficulty(difficulty)
         puzzle = self.puzzle.generate_puzzle()
+        if not puzzle:
+            self.ui.display_message("No puzzles left!")
+            self.game_over = True
+            return
+        self.ui.display_puzzle(puzzle)
+        
         pass
