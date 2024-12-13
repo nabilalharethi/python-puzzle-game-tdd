@@ -40,4 +40,11 @@ class TestUI:
         with patch('builtins.input', return_value="A") as mock_input:
             with pytest.raises(ValueError, match="Player name must be at least 2 characters"):
                 self.ui.get_player_name()
+    
+    def test_show_message(self):
+       
+        with patch('builtins.print') as mock_print:
+            test_message = "this is a message"
+            self.ui.show_message(test_message)
+            mock_print.assert_called_once_with(test_message)
 
