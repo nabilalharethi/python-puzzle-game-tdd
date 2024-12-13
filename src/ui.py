@@ -8,7 +8,9 @@ class UI:
         
     def display_welcome_message(self):
         
-        print(" 🧩 Welcome to the Puzzle Game! 🧩")
+        print("🧩 Welcome to Puzzle Challenge! 🧩")
+        print("Test your skills across Math, Words, and Logic Puzzles!")
+        print("-" * 40)
         
     def get_player_name(self):
         
