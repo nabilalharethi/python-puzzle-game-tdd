@@ -9,11 +9,16 @@ class TestUI:
 
     def test_display_welcome_message(self):
         
-        ui = UI()
+        
         with patch('builtins.print') as mock_print:
-            ui.display_welcome_message()
-            mock_print.assert_called_once()
-            assert "Welcome" in mock_print.call_args[0][0]
+            self.ui.display_welcome_message()
+            
+            assert mock_print.call_count == 3
+            calls = mock_print.call_args_list
+            assert "🧩 Welcome to Puzzle Challenge! 🧩" in calls[0][0][0]
+            assert "Test your skills across Math, Words, and Logic Puzzles!" in calls[1][0][0]
+            assert calls[2][0][0] == "-" * 40
+
             
     def test_get_player_name(self):
 
