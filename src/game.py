@@ -47,3 +47,9 @@ class Game:
             if self.lives <= 0:
                 self.game_over = True
                 self.ui.display_message("Game Over!")
+    
+    def reset_game(self):
+        self.score = 0
+        self.lives = 3
+        self.game_over = False
+        self.puzzle.used_puzzles.clear()
