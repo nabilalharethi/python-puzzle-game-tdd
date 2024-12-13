@@ -20,5 +20,15 @@ class Game:
             self.play_turn()
 
     def play_turn(self):
+        while True:
+            try:
+                difficulty = int(input("Choose Difficulty (1-3): "))
+                if not (1 <= difficulty <= 3):
+                    raise ValueError("Invalid difficulty")
+                break
+            except ValueError:
+                self.ui.display_message("Please choose a valid difficulty (1, 2, or 3).")
+
+        self.puzzle.set_difficulty(difficulty)
         puzzle = self.puzzle.generate_puzzle()
         pass
