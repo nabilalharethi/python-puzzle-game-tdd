@@ -44,4 +44,6 @@ class Game:
         else:
             self.lives -= 1
             self.ui.display_message("Incorrect!")
-        pass
+            if self.lives <= 0:
+                self.game_over = True
+                self.ui.display_message("Game Over!")

@@ -114,5 +114,4 @@ class TestGame:
 
         with patch("builtins.input", return_value="2"):
             sut.play_turn()
-            
         assert sut.score == 10, "Score should increase by 10 for a correct answer"
