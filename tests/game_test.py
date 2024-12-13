@@ -115,3 +115,20 @@ class TestGame:
         with patch("builtins.input", return_value="2"):
             sut.play_turn()
         assert sut.score == 10, "Score should increase by 10 for a correct answer"
+
+    def test_reset_game_resets_game_attributes(self):
+        # Arrange
+        sut = Game()
+        sut.score = 50
+        sut.lives = 1
+        sut.game_over = True
+        sut.puzzle.used_puzzles = {"Puzzle1"}
+
+        # Act
+        sut.reset_game()
+
+        # Assert
+        assert sut.score == 0, "Score should reset to 0"
+        assert sut.lives == 3, "Lives should reset to 3"
+        assert not sut.game_over, "game_over should be False"
+        assert not sut.puzzle.used_puzzles, "used_puzzles should be empty"
