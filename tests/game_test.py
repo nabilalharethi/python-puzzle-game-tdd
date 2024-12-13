@@ -132,3 +132,17 @@ class TestGame:
         assert sut.lives == 3, "Lives should reset to 3"
         assert not sut.game_over, "game_over should be False"
         assert not sut.puzzle.used_puzzles, "used_puzzles should be empty"
+
+    def test_start_game_resets_game_and_starts_loop(self):
+        sut = Game()
+        sut.ui = Mock()
+        sut.reset_game = Mock()  # Mock reset_game to track calls
+        sut.play_turn = Mock(side_effect=lambda: setattr(sut, "game_over", True))
+
+    # Act
+        sut.start_game()
+
+    # Assert
+        sut.reset_game.assert_called_once()
+        sut.ui.display_message.assert_called_once_with("Welcome to the Puzzle Game!")
+        sut.play_turn.assert_called_once()
