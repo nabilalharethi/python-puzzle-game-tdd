@@ -1,5 +1,6 @@
 import pytest
 from unittest.mock import Mock, patch
+from io import StringIO
 from src.ui import UI 
 
 class TestUI:
@@ -71,3 +72,13 @@ class TestUI:
             result = self.ui.prompt_input("Prompt: ")
             
             assert result == ""
+
+    def test_display_puzzle(self):
+        ui = UI()
+        puzzle = {"content": "What is 2 + 2?", "solution": "4"}
+
+        # Use patch to capture the output of print
+        with patch("sys.stdout", new=StringIO()) as fake_out:
+            ui.display_puzzle(puzzle)
+            # Assert that the printed output matches the expected string
+            assert fake_out.getvalue().strip() == "Puzzle: What is 2 + 2?"

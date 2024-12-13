@@ -31,3 +31,5 @@ class UI:
 
         return input(prompt).strip()
     
+    def display_puzzle(self, puzzle):
+        pass
