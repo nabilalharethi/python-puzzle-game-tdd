@@ -24,4 +24,7 @@ class UI:
         
         return name
     
+    def show_message(self, message):
+        
+        print(message)
     

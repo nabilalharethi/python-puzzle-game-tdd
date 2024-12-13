@@ -47,4 +47,3 @@ class TestUI:
             test_message = "this is a message"
             self.ui.show_message(test_message)
             mock_print.assert_called_once_with(test_message)
-
