@@ -15,38 +15,48 @@ class Game:
         self.ui = UI()
 
     def start_game(self):
-        self.ui.display_welcome_message()
-        while self.game_over is False:
-            self.play_turn()
+        while True:
+            self.ui.display_welcome_message()
+            self.reset_game()
+
+            while not self.game_over:
+                self.play_turn()
+
+            replay = self.ui.prompt_input("Would you like to play again? (yes/no): ")
+            if replay != "yes":
+                self.ui.show_message("Thanks for playing!")
+                break
+
 
     def play_turn(self):
         while True:
             try:
-                difficulty = int(input("Choose Difficulty (1-3): "))
+                difficulty = int(self.ui.prompt_input("Choose Difficulty (1-3): "))
                 if not (1 <= difficulty <= 3):
                     raise ValueError("Invalid difficulty")
                 break
             except ValueError:
-                self.ui.display_message("Please choose a valid difficulty (1, 2, or 3).")
+                self.ui.show_message("Please choose a valid difficulty (1, 2, or 3).")
 
         self.puzzle.set_difficulty(difficulty)
         puzzle = self.puzzle.generate_puzzle()
         if not puzzle:
-            self.ui.display_message("No puzzles left!")
+            self.ui.show_message("No puzzles left!")
             self.game_over = True
             return
+
         self.ui.display_puzzle(puzzle)
-        
-        player_answer = self.ui.get_input("Enter your answer: ")
+        player_answer = self.ui.prompt_input("Enter your answer: ")
         if self.puzzle.validate_answer(puzzle, player_answer):
             self.score += 10
-            self.ui.display_message("Correct!")
+            self.ui.show_message("Correct!")
         else:
             self.lives -= 1
-            self.ui.display_message("Incorrect!")
+            self.ui.show_message("Incorrect!")
             if self.lives <= 0:
                 self.game_over = True
-                self.ui.display_message("Game Over!")
+                self.ui.show_message("Game Over!")
+
     
     def reset_game(self):
         self.score = 0
