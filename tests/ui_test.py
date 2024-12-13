@@ -47,3 +47,27 @@ class TestUI:
             test_message = "this is a message"
             self.ui.show_message(test_message)
             mock_print.assert_called_once_with(test_message)
+            
+    
+    def test_prompt_input(self):
+
+        with patch('builtins.input', return_value="Test Input") as mock_input:
+            prompt = "Enter something: "
+            result = self.ui.prompt_input(prompt)
+            
+            mock_input.assert_called_once_with(prompt)
+            assert result == "Test Input"
+            
+    def test_prompt_input_strips_whitespace(self):
+        
+        with patch('builtins.input', return_value="  Whitespace Test  ") as mock_input:
+            result = self.ui.prompt_input("Prompt: ")
+            
+            assert result == "Whitespace Test"
+    
+    def test_prompt_input_empty_input(self):
+       
+        with patch('builtins.input', return_value="") as mock_input:
+            result = self.ui.prompt_input("Prompt: ")
+            
+            assert result == ""
