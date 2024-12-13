@@ -87,3 +87,17 @@ class TestGame:
             sut.play_turn()
 
         sut.ui.display_puzzle.assert_called_once_with(generated_puzzle)
+
+    def test_play_turn_validates_player_answer(self):
+        sut = Game()
+        sut.ui = Mock()
+        mock_puzzle = Mock()
+        generated_puzzle = {"content": "2 + 2 = ?", "solution": "4"}
+        sut.ui.get_input.return_value = "4"  # Mock user input
+        mock_puzzle.generate_puzzle.return_value = generated_puzzle
+        sut.puzzle = mock_puzzle
+
+        with patch("builtins.input", return_value="2"):
+            sut.play_turn()
+
+        mock_puzzle.validate_answer.assert_called_once_with(generated_puzzle, "4")
