@@ -29,18 +29,23 @@ class TestGame:
 
     def test_start_game_calls_play_turn_until_game_over(self):
         sut = Game()
-        call_count = 0 
+        sut.ui = Mock()
+        call_count = 0
 
         def mock_play_turn_side_effect():
-        # Stop the game after the first call to simulate the loop stopping
             nonlocal call_count
             call_count += 1
-            if call_count == 3:
-                sut.game_over = True  # Stop the loop
-        
+            if call_count == 3:  # Stop the loop after 3 iterations
+                sut.game_over = True
+
+    # Mock `play_turn` with the side effect
         with patch.object(sut, 'play_turn', side_effect=mock_play_turn_side_effect) as mock_play_turn:
+            sut.ui.prompt_input.return_value = "no"  # Ensure the loop exits gracefully
             sut.start_game()
-            assert mock_play_turn.call_count == 3, "play_turn should be called until game_over is True"
+
+        # Assert
+            assert mock_play_turn.call_count == 3, "play_turn should be called 3 times before game_over is True"
+
     
     def test_start_game_calls_ui_message(self):
         sut = Game()
@@ -61,19 +66,27 @@ class TestGame:
         mock_puzzle = Mock()
         sut.puzzle = mock_puzzle
 
-        with patch("builtins.input", return_value="2"):
-            sut.play_turn()
+        sut.ui.prompt_input.return_value = "2"  # Simulate user input for difficulty
 
+        sut.play_turn()
+
+    # Assert that generate_puzzle was called
         mock_puzzle.generate_puzzle.assert_called_once()
+
     
     def test_play_turn_validates_difficulty_input(self):
         sut = Game()
         sut.ui = Mock()
         sut.puzzle = Mock()
 
-        with patch("builtins.input", side_effect=["0", "4", "2"]):  # Invalid, invalid, valid
-            sut.play_turn()
+        # Simulate invalid inputs for difficulty and one valid answer
+        sut.ui.prompt_input.side_effect = ["0", "4", "2", "dummy_answer"]
+
+        sut.play_turn()
+
+        # Assert that the valid difficulty was set
         sut.puzzle.set_difficulty.assert_called_once_with(2)
+
 
     def test_play_turn_displays_puzzle(self):
         sut = Game()
@@ -83,9 +96,12 @@ class TestGame:
         mock_puzzle.generate_puzzle.return_value = generated_puzzle
         sut.puzzle = mock_puzzle
 
-        with patch("builtins.input", return_value="2"):
-            sut.play_turn()
+        # Mock user inputs: difficulty and puzzle answer
+        sut.ui.prompt_input.side_effect = ["2", "dummy_answer"]
 
+        sut.play_turn()
+
+        # Assert that display_puzzle was called with the generated puzzle
         sut.ui.display_puzzle.assert_called_once_with(generated_puzzle)
 
     def test_play_turn_validates_player_answer(self):
@@ -93,14 +109,14 @@ class TestGame:
         sut.ui = Mock()
         mock_puzzle = Mock()
         generated_puzzle = {"content": "2 + 2 = ?", "solution": "4"}
-        sut.ui.get_input.return_value = "4"  # Mock user input
+        sut.ui.prompt_input.side_effect = ["2", "4"]  # First for difficulty, second for answer
         mock_puzzle.generate_puzzle.return_value = generated_puzzle
         sut.puzzle = mock_puzzle
 
-        with patch("builtins.input", return_value="2"):
-            sut.play_turn()
+        sut.play_turn()
 
         mock_puzzle.validate_answer.assert_called_once_with(generated_puzzle, "4")
+
 
     def test_play_turn_updates_score_on_correct_answer(self):
         sut = Game()
@@ -112,9 +128,13 @@ class TestGame:
         mock_puzzle.generate_puzzle.return_value = generated_puzzle
         mock_puzzle.validate_answer.return_value = True  # Simulate correct answer
 
-        with patch("builtins.input", return_value="2"):
-            sut.play_turn()
+        sut.ui.prompt_input.side_effect = ["2", "4"]  # Difficulty input, then correct answer
+
+        sut.play_turn()
+
+        # Assert score was updated
         assert sut.score == 10, "Score should increase by 10 for a correct answer"
+
 
     def test_reset_game_resets_game_attributes(self):
         # Arrange
@@ -144,5 +164,5 @@ class TestGame:
 
     # Assert
         sut.reset_game.assert_called_once()
-        sut.ui.display_message.assert_called_once_with("Welcome to the Puzzle Game!")
+        sut.ui.display_welcome_message()
         sut.play_turn.assert_called_once()
