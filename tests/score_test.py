@@ -18,5 +18,3 @@ class TestScore:
 
         self.score.add_points(10)
         assert self.score.get_current_score() == 10
-        
-        

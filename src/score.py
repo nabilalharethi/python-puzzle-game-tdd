@@ -12,3 +12,13 @@ class Score:
     def get_high_score(self):
 
         return self._high_score
+    
+    def add_points(self, points):
+
+        if not isinstance(points, int):
+            raise ValueError("Points must be an integer")
+        
+        if points < 0:
+            raise ValueError("Points cannot be negative")
+        
+        self._current_score += points
