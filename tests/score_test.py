@@ -37,3 +37,10 @@ class TestScore:
         self.score.add_points(50)
         self.score.set_high_score()
         assert self.score.get_high_score() == 100
+        
+    
+    def test_score_multiplier(self):
+
+        self.score.set_score_multiplier(2)
+        self.score.add_points(10)
+        assert self.score.get_current_score() == 20
