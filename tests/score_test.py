@@ -14,4 +14,6 @@ class TestScore:
         assert self.score.get_current_score() == 0
         assert self.score.get_high_score() == 0
         
+    
+        
         
