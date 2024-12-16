@@ -18,3 +18,9 @@ class TestScore:
 
         self.score.add_points(10)
         assert self.score.get_current_score() == 10
+        
+    def test_reset_score(self):
+
+        self.score.add_points(50)
+        self.score.reset_score()
+        assert self.score.get_current_score() == 0
