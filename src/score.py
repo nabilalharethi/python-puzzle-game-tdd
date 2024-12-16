@@ -22,3 +22,7 @@ class Score:
             raise ValueError("Points cannot be negative")
         
         self._current_score += points
+        
+    def reset_score(self):
+
+        self._current_score = 0
