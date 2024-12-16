@@ -24,3 +24,16 @@ class TestScore:
         self.score.add_points(50)
         self.score.reset_score()
         assert self.score.get_current_score() == 0
+        
+    
+    
+    def test_high_score(self):
+
+        self.score.add_points(100)
+        self.score.set_high_score()
+        assert self.score.get_high_score() == 100
+
+        self.score.reset_score()
+        self.score.add_points(50)
+        self.score.set_high_score()
+        assert self.score.get_high_score() == 100
