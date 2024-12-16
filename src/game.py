@@ -5,14 +5,15 @@ import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 from src.puzzle import Puzzle
 from src.ui import UI
+from src.score import Score
 
 class Game:
     def __init__(self):
         self.puzzle = Puzzle()
         self.game_over = False
-        self.score = 0 # would be later changed to instance of score class
         self.lives = 3
         self.ui = UI()
+        self.score = Score()
 
     def start_game(self):
         while True:
@@ -25,6 +26,7 @@ class Game:
             replay = self.ui.prompt_input("Would you like to play again? (yes/no): ")
             if replay != "yes":
                 self.ui.show_message("Thanks for playing!")
+                self.ui.show_message(f"High Score: {self.score.get_high_score()}")
                 break
 
 
@@ -48,8 +50,9 @@ class Game:
         self.ui.display_puzzle(puzzle)
         player_answer = self.ui.prompt_input("Enter your answer: ")
         if self.puzzle.validate_answer(puzzle, player_answer):
-            self.score += 10
-            self.ui.show_message("Correct!")
+            points = 10 * difficulty
+            self.score.add_points(points)
+            self.ui.show_message(f"Correct! +{points} points")
         else:
             self.lives -= 1
             self.ui.show_message("Incorrect!")
@@ -59,7 +62,10 @@ class Game:
 
     
     def reset_game(self):
-        self.score = 0
+        self.score.reset_score()
+        
         self.lives = 3
         self.game_over = False
         self.puzzle.used_puzzles.clear()
+        
+        self.score.set_high_score()

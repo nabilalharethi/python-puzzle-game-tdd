@@ -123,7 +123,7 @@ class TestGame:
         sut.ui = Mock()
         mock_puzzle = Mock()
         sut.puzzle = mock_puzzle
-        sut.score = 0
+
         generated_puzzle = {"content": "2 + 2 = ?", "solution": "4"}
         mock_puzzle.generate_puzzle.return_value = generated_puzzle
         mock_puzzle.validate_answer.return_value = True  # Simulate correct answer
@@ -133,13 +133,13 @@ class TestGame:
         sut.play_turn()
 
         # Assert score was updated
-        assert sut.score == 10, "Score should increase by 10 for a correct answer"
+        assert sut.score.get_current_score()== 20
 
 
     def test_reset_game_resets_game_attributes(self):
         # Arrange
         sut = Game()
-        sut.score = 50
+        sut.score.add_points(50)
         sut.lives = 1
         sut.game_over = True
         sut.puzzle.used_puzzles = {"Puzzle1"}
@@ -148,7 +148,7 @@ class TestGame:
         sut.reset_game()
 
         # Assert
-        assert sut.score == 0, "Score should reset to 0"
+        assert sut.score.get_current_score() == 0, "Score should reset to 0"
         assert sut.lives == 3, "Lives should reset to 3"
         assert not sut.game_over, "game_over should be False"
         assert not sut.puzzle.used_puzzles, "used_puzzles should be empty"
