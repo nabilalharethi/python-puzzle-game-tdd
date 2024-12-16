@@ -94,4 +94,7 @@ Our current test suite achieves **94% code coverage** across the project.
 
 ### Why Not 100% Coverage?
 
-The slight gaps in coverage for `game.py`, `puzzle.py`, and `score.py` is due  a few  edge cases that haven't been fully tested.  such as Specific input combinations not covered by the current test suite and Rare error handling paths that are difficult to trigger in unit tests
+The slight gaps in coverage for `game.py`, `puzzle.py`, and `score.py` is due  a few  edge cases that haven't been fully tested.  such as Specific input combinations not covered by the current test suite like A user entering unusual or unexpected inputs or Scenarios where certain features or methods interact in non-standard ways.
+
+and Rare error handling paths that are difficult to trigger in unit tests like Invalid configurations or corrupted data.
+Rare runtime errors (e.g., empty puzzle lists, invalid difficulty levels).
