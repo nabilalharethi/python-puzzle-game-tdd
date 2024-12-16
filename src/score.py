@@ -26,3 +26,9 @@ class Score:
     def reset_score(self):
 
         self._current_score = 0
+        
+    
+    def set_high_score(self):
+     
+        if self._current_score > self._high_score:
+            self._high_score = self._current_score
