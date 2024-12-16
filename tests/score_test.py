@@ -14,6 +14,9 @@ class TestScore:
         assert self.score.get_current_score() == 0
         assert self.score.get_high_score() == 0
         
-    
+    def test_add_points(self):
+
+        self.score.add_points(10)
+        assert self.score.get_current_score() == 10
         
         
