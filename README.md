@@ -6,8 +6,8 @@
 - **Project Type:** Test-Driven Development (TDD) Implementation
 
 ## Project Team
-- **Nabil**
-- **Andrey**
+- **Nabil Al-Harethi**
+- **Andrey Belozerov**
 
 ## Project Overview
 
@@ -41,3 +41,57 @@ This project strictly adheres to the TDD workflow:
 ---
 
 **Note**: This project is a demonstration of Test-Driven Development principles and is part of an academic course assignment.
+
+
+## Installation
+
+Clone the repository:
+
+git clone https://github.com/yourusername/puzzle-challenge.git
+
+cd puzzle-challenge
+
+
+
+## Running the Game
+
+python -m src.main
+
+## Running Tests
+
+pytest
+
+## How to Play
+
+Choose a difficulty level (1-3)
+
+Solve puzzles across Math, Words, and Logic categories
+
+You have 3 lives
+
+Each correct answer gives you 10 points
+
+Incorrect answers reduce your lives
+
+## Game Rules
+
+Select difficulty: 1 (Easy), 2 (Medium), 3 (Hard)
+
+Time limits vary by difficulty
+
+Unique puzzles in each game session
+
+Game ends when you run out of lives or complete all 
+puzzles
+
+## Code Coverage
+
+Our current test suite achieves **94% code coverage** across the project. 
+
+### Coverage Breakdown:
+
+![Alt Text](coverage.png)
+
+### Why Not 100% Coverage?
+
+The slight gaps in coverage for `game.py`, `puzzle.py`, and `score.py` is due  a few  edge cases that haven't been fully tested.  such as Specific input combinations not covered by the current test suite and Rare error handling paths that are difficult to trigger in unit tests
